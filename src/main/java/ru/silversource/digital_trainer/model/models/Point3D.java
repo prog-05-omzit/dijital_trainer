@@ -9,7 +9,6 @@ public class Point3D {
     private Long id;
     private Double x;
     private Double y;
-
     private Double z;
     private Double valid;
 
@@ -20,6 +19,7 @@ public class Point3D {
     public Point3D(Double x, Double y, Double z, Double valid) {
         this.x = x;
         this.y = y;
+        this.z = z;
         this.valid = valid;
     }
 

@@ -1,7 +1,6 @@
 package ru.silversource.digital_trainer.model.dto;
 
 import org.springframework.stereotype.Component;
-import ru.silversource.digital_trainer.model.models.Person;
 
 import java.util.ArrayList;
 import java.util.Collections;

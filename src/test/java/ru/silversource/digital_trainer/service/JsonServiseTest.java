@@ -13,7 +13,7 @@ class JsonServiseTest {
 
     @Test
     void findFiles() throws IOException {
-        List<Files> files = JsonServise.findFiles("C:/json_test/outjson/output");
+        List<Files> files = JsonServise.findFiles("C:/json_test/outjson/output", "json");
         assertEquals(files.size(),2125);
     }
 
@@ -27,9 +27,9 @@ class JsonServiseTest {
     void getCoords() {
         List<Frame> frames = JsonServise.getFrames("C:/json_test");
         assertEquals(frames.size(),18);
-        assertEquals(frames.get(3).getPerson().getPose_keypoints_2d().get(5).getId(),5);
-        assertEquals(frames.get(3).getPerson().getPose_keypoints_2d().get(5).getX(),848.209);
-        assertEquals(frames.get(3).getPerson().getPose_keypoints_2d().get(5).getY(),627.471);
-        assertEquals(frames.get(3).getPerson().getPose_keypoints_2d().get(5).getValid(),0.578552);
+        assertEquals(frames.get(3).getPose_keypoints_2d().get(0).getId(),0);
+        assertEquals(frames.get(3).getPose_keypoints_2d().get(0).getX(),848.209);
+        assertEquals(frames.get(3).getPose_keypoints_2d().get(0).getY(),627.471);
+        assertEquals(frames.get(3).getPose_keypoints_2d().get(0).getValid(),0.578552);
     }
 }

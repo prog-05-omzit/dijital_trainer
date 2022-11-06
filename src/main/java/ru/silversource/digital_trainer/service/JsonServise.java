@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.silversource.digital_trainer.model.dto.FrameDTO;
 import ru.silversource.digital_trainer.model.models.Frame;
+import ru.silversource.digital_trainer.model.models.OldFrame;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +14,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,7 +22,7 @@ public class JsonServise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonServise.class);
 
-    private List<Frame> frames;
+    private List<OldFrame> frames;
 
     public JsonServise() {
     }
@@ -45,21 +45,21 @@ public class JsonServise {
         return frameDTO.getPeople().isEmpty()? null: new Frame(frameDTO);
     }
 
-    public static List<Files> findFiles(String path) throws IOException {
+    public static List<Files> findFiles(String path, String extension) throws IOException {
         LOGGER.debug("Start method {}, with path {}", "createListFrames()", path);
 
         if (!Files.isDirectory(Paths.get(path))) {
             throw new IllegalArgumentException("Path must be directory!");
         }
 
-        List jsonFiles;
+        List files;
         try (Stream<Path> walk = Files.walk(Path.of(path), 1)) {
-            jsonFiles = walk
+            files = walk
                     .filter(Files::isRegularFile)
-                    .filter(p -> p.getFileName().toString().endsWith("json"))
+                    .filter(p -> p.getFileName().toString().endsWith(extension))
                     .collect(Collectors.toList());
         }
-        return jsonFiles;
+        return files;
     }
 
     public static List<Frame> getFrames(String path) {
@@ -73,6 +73,7 @@ public class JsonServise {
                     .collect(Collectors.toList()).forEach(f -> {
                         Frame frame = getFrame(f.toAbsolutePath().toString());
                         if(frame != null) {
+                            frame.setId(Long.valueOf(frames.size()));
                             frames.add(frame);
                         }
                     });
