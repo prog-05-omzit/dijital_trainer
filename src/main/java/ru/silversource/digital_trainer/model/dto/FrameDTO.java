@@ -1,7 +1,10 @@
 package ru.silversource.digital_trainer.model.dto;
 
 import org.springframework.stereotype.Component;
+import ru.silversource.digital_trainer.model.models.Person;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -26,6 +29,10 @@ public class FrameDTO {
     }
 
     public void setPeople(List<PeopleDTO> people) {
-        this.people = people;
+        if(people.isEmpty()) {
+            this.people = new ArrayList<>(Collections.singleton(new PeopleDTO()));
+        }else {
+            this.people = people;
+        }
     }
 }
