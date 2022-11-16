@@ -19,7 +19,7 @@ class JsonServiseTest {
 
     @Test
     void getFrames() {
-        List<Frame> frames = JsonServise.getFrames("C:/json_test/outjson/output");
+        List<Frame> frames = JsonServise.getFrames("C:/output_json");
         assertEquals(frames.size(),2059);
     }
 

@@ -14,7 +14,7 @@ class XLSServiceTest {
 
     @Test
     void framesToXLS() throws IOException {
-        String path = "C:/json_test";
+        String path = "C:/output_json";
         List<Frame> frames = JsonServise.getFrames(path);
         //List<Files> files = JsonServise.findFiles(path, "xls");
         //assertEquals(files.size(),0);
